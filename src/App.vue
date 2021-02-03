@@ -9,9 +9,11 @@
         {{ pokemon.url }}
       </li>
     </ul> -->
-    <FormCustom @sendForm="searchPokemon" />
-    <FormCustom @sendForm="searchDog" />
-    <Cards :cards="pokemons" />
+    <FormCustom msg="Cerca un pokemon" @sendForm="searchPokemon" />
+    <FormCustom msg="Cerca un tipo di pokemon" @sendForm="searchType" />
+    <!-- <FormCustom @sendForm="searchPokemon" /> -->
+    <Cards :cards="pokemons" v-if="pokemons.length > 0" />
+    <h1 v-else>Non ci sono risultati</h1>
   </div>
 </template>
 
@@ -48,14 +50,56 @@ export default {
 
         this.pokemons = result.data.results;
         this.count = result.data.count;
+        console.log(this.pokemons.length);
       })
-      .catch(err => {
-        console.error(err);
+      .catch(() => {
+        // console.error(err);
+        this.pokemons = [];
       });
   },
   methods: {
     searchPokemon(text) {
       console.log(text);
+      this.axios
+        .get(`${this.base_url}/pokemon/${text}`)
+        .then(result => {
+          console.log(result);
+          this.pokemons = [{
+            name: result.data.name,
+            height: result.data.height,
+            weight: result.data.weight
+          }];
+
+          // const {
+          //   data: { results }
+          // } = result;
+          // console.log(results);
+
+          // this.pokemons = result.data.results;
+          // this.count = result.data.count;
+        })
+        .catch(() => {
+          // console.error(err);
+          this.pokemons = [];
+
+        });
+    },
+    searchType(text) {
+      console.log(text);
+      this.axios
+        .get(`${this.base_url}/type/${text}`)
+        .then(result => {
+          const results = result.data.pokemon;
+
+          const pokemons = results.map(element => {
+            return { name: element.pokemon.name, url: element.pokemon.url };
+          });
+
+          this.pokemons = pokemons;
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
   }
 };
