@@ -8,7 +8,7 @@
       v-for="(card, index) in cards"
       :key="index"
       :name="card.name"
-      :url="card.url"
+      :img="card.img"
     />
   </div>
 </template>
@@ -28,4 +28,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+@import "../assets/scss/_variables.scss";
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: $color;
+}
+</style>

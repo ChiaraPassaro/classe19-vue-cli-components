@@ -18,6 +18,13 @@
         value="Cerca"
         @click="sendSearch"
       />
+
+      <BaseSelect 
+        id="typePokemon" 
+        name="typePokemon" 
+        :optionSelected="typeSelected"
+        @change="sendType($event)"
+      />
       <!-- <input type="submit" value="Cerca" @click="sendSearch"> -->
     </form>
   </div>
@@ -26,22 +33,29 @@
 
 <script>
 import BaseInput from "./BaseInput.vue";
+import BaseSelect from "./BaseSelect.vue";
 
 export default {
   name: "FormCustom",
   props: ["msg"],
   components: {
-    BaseInput
+    BaseInput,
+    BaseSelect
   },
   data() {
     return {
-      searchText: ""
+      searchText: "",
+      typeSelected: ""
     }
   },
   methods: {
     sendSearch() {
       // console.log(this.searchText);
       this.$emit('sendForm', this.searchText);
+    },
+    sendType(text) {
+      this.typeSelected = text;
+      this.$emit('sendTypeSelected', this.typeSelected);
     }
   }
 }

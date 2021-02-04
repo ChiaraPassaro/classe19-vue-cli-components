@@ -1,6 +1,7 @@
 <template>
   <div class="card">
-    {{ name }} {{ url }}
+    <h3>{{ name }}</h3>
+    <img :src="img" :alt="name">
   </div>
 </template>
 
@@ -13,13 +14,20 @@ export default {
       type: String,
       required: true
     },
-    url: {
+    img: {
       type: String
     }
   }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  .card {
+    width: calc((100% / 4) - 10px);
+    margin: 5px;
+    background-color: lightblue;
+    img {
+      width: 60%;
+    }
+  }
 </style>
