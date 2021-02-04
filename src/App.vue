@@ -19,7 +19,7 @@
     />
     <FormCustom
       msg="Cerca un tipo di pokemon"
-      @sendForm="searchType" 
+      @sendForm="searchType"
       @sendTypeSelected="sendTypeSelected"
     />
     <!-- <FormCustom @sendForm="searchPokemon" /> -->

@@ -1,20 +1,22 @@
 <template>
-  <input v-if="type === 'submit'"
+  <input
+    v-if="type === 'submit'"
     :type="type"
     :id="id"
     :name="name"
-    :value="value" 
+    :value="value"
     @click="$emit('click')"
-  >
+  />
 
-  <input v-else
+  <input
+    v-else
     :type="type"
     :placeholder="placeholder"
     :id="id"
     :name="name"
     :value="value"
     @input="$emit('input', $event.target.value)"
-    >
+  />
 </template>
 
 <script>
@@ -38,9 +40,7 @@ export default {
       type: String
     }
   }
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

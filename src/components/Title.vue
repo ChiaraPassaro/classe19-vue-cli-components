@@ -6,9 +6,7 @@
 export default {
   name: "Title",
   props: ["msg"]
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
